@@ -1,2 +1,3 @@
-# README-generator
-A generator to create a good README by asking all the right questions
+null
+"https://avatars0.githubusercontent.com/u/56180437?v=4"
+{"project title":"README generator","description":"A easy way to generate README files","content":"Title, Descrition, Table of Contents, Installation, Usage, License, Contributors, Tests, Questions","instructions":"Clone the Repo","usage":"Offering people a new way to generate README files quickly and efficiently","licence":"Intillectual property use","contributing":"Me, Myself, and I","tests":"A lot of trial and error"}
