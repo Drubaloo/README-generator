@@ -41,15 +41,6 @@ inquirer
                 email = userInfo.email
                 picture = userInfo.avatar_url
 
-                fs.writeFile(`README.md`, `#` + JSON.stringify(userInfo.email) + "\n", function (err) {
-                    if (err) {
-                        return console.log(err);
-                    }
-                    fs.appendFile(`README.md`, `#` + JSON.stringify(userInfo.avatar_url) + "\n", function (err) {
-                        if (err) {
-                            return console.log(err);
-                        }
-                        console.log("Success!");
 
                         inquirer
                             .prompt([
@@ -116,10 +107,3 @@ inquirer
                     })
                 })
             })
-
-
-
-
-        })
-
-    })
