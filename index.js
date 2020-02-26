@@ -12,6 +12,8 @@ var gitHub = `https://api.github.com/users/` + username
 var email = ``
 var picture = ``
 
+var json2md = require("json2md")
+
 inquirer
     .prompt([
         {
@@ -39,11 +41,11 @@ inquirer
                 email = userInfo.email
                 picture = userInfo.avatar_url
 
-                fs.writeFile(`README.md`, JSON.stringify(userInfo.email) + "\n", function (err) {
+                fs.writeFile(`README.md`, `#` + JSON.stringify(userInfo.email) + "\n", function (err) {
                     if (err) {
                         return console.log(err);
                     }
-                    fs.appendFile(`README.md`, JSON.stringify(userInfo.avatar_url) + "\n", function (err) {
+                    fs.appendFile(`README.md`, `#` + JSON.stringify(userInfo.avatar_url) + "\n", function (err) {
                         if (err) {
                             return console.log(err);
                         }
@@ -94,7 +96,7 @@ inquirer
                                 }
                             ])
                             .then(function (response) {
-                                fs.appendFile("README.md", JSON.stringify(response), function (err) {
+                                fs.appendFile("README.md", `#` + JSON.stringify(response) + "\n", function (err) {
 
                                     if (err) {
                                         return console.log(err);
