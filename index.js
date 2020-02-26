@@ -57,7 +57,7 @@ inquirer
                                 {
                                     type: "input",
                                     message: "What is your project title?",
-                                    name: "project title"
+                                    name: "title"
                                 },
                                 {
                                     type: "input",
@@ -96,13 +96,18 @@ inquirer
                                 }
                             ])
                             .then(function (response) {
-                                fs.appendFile("README.md", `#` + JSON.stringify(response) + "\n", function (err) {
+
+                                var info = `#` + (response.title) + "\n" + `#` + (response.description) + "\n" + `#` + (response.content) + "\n" + `#` + (response.instructions) + "\n" + `###` + (response.usage) + "\n" + `#` + (response.licence) + "\n" + `#` + (response.contributing) + "\n" + `#` + (response.tests) + "\n" + `#` + (email) + "\n" + (picture)
+
+                                fs.appendFile("README.md", info + "\n", function (err) {
 
                                     if (err) {
                                         return console.log(err);
                                     }
 
                                     console.log("Success!");
+
+                                    console.log(info)
 
                                 });
 
