@@ -1,10 +1,5 @@
-var jsdom = require("jsdom");
-const { JSDOM } = jsdom;
-const { window } = new JSDOM();
-const { document } = (new JSDOM('')).window;
-global.document = document;
 
-var $ = jQuery = require('jquery')(window);
+var axios = require(`axios`)
 var inquirer = require(`inquirer`)
 var fs = require(`fs`)
 var username = ``
@@ -12,7 +7,6 @@ var gitHub = `https://api.github.com/users/` + username
 var email = ``
 var picture = ``
 
-var json2md = require("json2md")
 
 inquirer
     .prompt([
@@ -33,77 +27,77 @@ inquirer
             username = response.username
             gitHub = `https://api.github.com/users/` + username
             console.log(gitHub)
-
-            $.ajax({
-                url: gitHub,
-                method: `GET`
-            }).then(function (userInfo) {
-                email = userInfo.email
-                picture = userInfo.avatar_url
+            axios.get(gitHub).then(function (userInfo) {
+                console.log(userInfo)
+                email = userInfo.data.email
+                picture = userInfo.data.avatar_url
 
 
-                        inquirer
-                            .prompt([
 
-                                {
-                                    type: "input",
-                                    message: "What is your project title?",
-                                    name: "title"
-                                },
-                                {
-                                    type: "input",
-                                    message: "Please enter a short description of your project",
-                                    name: "description"
-                                },
-                                {
-                                    type: "input",
-                                    message: "Please list your table of contents",
-                                    name: "content"
-                                },
-                                {
-                                    type: "input",
-                                    message: "please list installation instructions",
-                                    name: "instructions"
-                                },
-                                {
-                                    type: "input",
-                                    message: "What would you use this product for",
-                                    name: "usage"
-                                },
-                                {
-                                    type: "input",
-                                    message: "What is this liscenced under?",
-                                    name: "licence"
-                                },
-                                {
-                                    type: "input",
-                                    message: "Who contributed to this project?",
-                                    name: "contributing"
-                                },
-                                {
-                                    type: "input",
-                                    message: "How did you test this project?",
-                                    name: "tests"
-                                }
-                            ])
-                            .then(function (response) {
+                inquirer
+                    .prompt([
 
-                                var info = `#` + (response.title) + "\n" + `#` + (response.description) + "\n" + `#` + (response.content) + "\n" + `#` + (response.instructions) + "\n" + `###` + (response.usage) + "\n" + `#` + (response.licence) + "\n" + `#` + (response.contributing) + "\n" + `#` + (response.tests) + "\n" + `#` + (email) + "\n" + (picture)
-
-                                fs.appendFile("README.md", info + "\n", function (err) {
-
-                                    if (err) {
-                                        return console.log(err);
-                                    }
-
-                                    console.log("Success!");
-
-                                    console.log(info)
-
-                                });
+                        {
+                            type: "input",
+                            message: "What is your project title?",
+                            name: "title"
+                        },
+                        {
+                            type: "input",
+                            message: "Please enter a short description of your project",
+                            name: "description"
+                        },
+                        {
+                            type: "input",
+                            message: "Please list your table of contents",
+                            name: "content"
+                        },
+                        {
+                            type: "input",
+                            message: "please list installation instructions",
+                            name: "instructions"
+                        },
+                        {
+                            type: "input",
+                            message: "What would you use this product for",
+                            name: "usage"
+                        },
+                        {
+                            type: "input",
+                            message: "What is this liscenced under?",
+                            name: "licence"
+                        },
+                        {
+                            type: "input",
+                            message: "Who contributed to this project?",
+                            name: "contributing"
+                        },
+                        {
+                            type: "input",
+                            message: "How did you test this project?",
+                            name: "tests"
+                        }
+                    ])
+                    .then(function (response) {
 
 
-                            })
+
+                        var info = `# ${response.title} \n#  ${response.description} \n# Table of Contents \n### ${response.content} \n# Instructions \n### ${response.instructions} \n# Usage \n### ${response.usage} \n# Licensing \n### ${response.licence} \n# Contributors \n### ${response.contributing}\n# Testing \n### ${response.tests} \n# Email \n### ${email} \n ![profile image](${picture}) \n \n ${'[![forthebadge](https://forthebadge.com/images/badges/powered-by-electricity.svg)](https://forthebadge.com)'}`
+
+                        fs.appendFile("README.md", info + "\n", function (err) {
+
+                            if (err) {
+                                return console.log(err);
+                            }
+
+                            console.log("Success!");
+
+                            console.log(info)
+
+                        });
+
+
                     })
-                })
             })
+        })
+    })
