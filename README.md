@@ -14,6 +14,6 @@
 ### Trial and error 
 # Email  
 ### null 
- ![alt text]https://avatars0.githubusercontent.com/u/56180437?v=4 
+ https://avatars0.githubusercontent.com/u/56180437?v=4 
  
  [![forthebadge](https://forthebadge.com/images/badges/powered-by-electricity.svg)](https://forthebadge.com)
