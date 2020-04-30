@@ -19,7 +19,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "inquirer": "^7.0.4",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "jsdom": "^16.2.0",
     "json2md": "^1.7.0"
   }
